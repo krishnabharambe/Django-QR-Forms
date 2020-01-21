@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4 mt-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Event QR</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Event Details</th>
+                            <th class="w-50">QR Code</th>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <b>Title</b>
+                                <p>{{QR.title}}</p>
+
+                                <b>Description</b>
+                                <p>{{QR.description}}</p>
+
+                                <b>Status</b>
+                                <p>{{QR.status}}</p>
+
+                                <b>Disabled Description</b>
+                                <p>{{QR.disabledesc}}</p>
+
+
+                            </td>
+                            <td>{% load static %}<img  src="{% static 'qrcode/3.svg' %}" class="img-fluid" alt=""><br>
+                                <a target="_blank" class="float-right btn btn-warning" href="{% static 'qrcode/3.svg' %}">Download</a>
+                            </td>
+                        </tr>
+
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+{% endblock %}

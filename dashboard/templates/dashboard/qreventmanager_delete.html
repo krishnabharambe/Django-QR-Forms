@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Delete Event</h6>
+        </div>
+        <div class="card-body">
+            <form action="{% url 'qreventmanager_delete' id=qrevent.id %}" method="post">{% csrf_token %}
+                <div class="form-group">
+                    <label for="">Title</label>
+                    <input type="text" class="form-control form-control-sm" name="title" id="" aria-describedby="helpId" placeholder=""
+                        value="{{qrevent.title}}" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="">Description</label>
+                    <textarea class="form-control form-control-sm" name="description" id="" rows="3"
+                        disabled>{{qrevent.description}}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="">Status</label>
+                    <select class="form-control form-control-sm" name="status" id="" disabled>
+                        <option value="created">Created</option>
+                        <option value="active">Active</option>
+                        <option value="disabled">Disabled</option>
+                    </select>
+                    <small class="text-dander">Please,Reselect Status</small>
+                </div>
+                <div class="form-group">
+                    <label for="">Diabled Description</label>
+                    <input type="text" class="form-control form-control-sm" name="disableddesc" id="" aria-describedby="helpId"
+                        placeholder="" value="{{qrevent.disabledesc}}" disabled>
+                </div>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- /.container-fluid -->
+{% endblock %}

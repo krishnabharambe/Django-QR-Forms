@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Event Enteries</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Full Name</th>
+                            <th>College</th>
+                            <th>Contact</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Full Name</th>
+                            <th>College</th>
+                            <th>Contact</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for QRF in QRFS %}
+                        <tr>
+                            <td>{{forloop.counter }}</td>
+                            <td>{{QRF.fullname}}</td>
+                            <td>{{QRF.college}}</td>
+                            <td>{{QRF.contact}}</td>
+                            <td>{{QRF.email}}</td>
+                            <td>
+                                <div class="btn-group-vertical btn-group-sm">
+                                    <form action="{% url 'trackmail' eid=QRF.eventid cid=QRF.id %}" method="post">{% csrf_token %}
+                                        {% if QRF.mailsent == '' %}
+                                        <input class="btn btn-primary btn-sm px-3" type="submit" name="sentmail"
+                                            value="Sent Mail">
+                                        {% else %}
+                                        <input class="btn btn-success btn-sm px-3" type="submit" name="resentmail"
+                                            value="Resent Mail">
+                                        {% endif %}
+                                    </form>
+                                    <a href="{% url 'finalprint' eid=QRF.eventid cid=QRF.id %}" target="_blank"
+                                        class="btn btn-warning btn-sm">Download</a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

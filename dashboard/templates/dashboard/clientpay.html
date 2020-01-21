@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>QRGen - Client</title>
+
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css" rel="stylesheet' %}" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1>{{QRE.title}}</h1>
+                <p>{{QRE.description}}</p>
+            </div>
+        </div>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4 mt-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Payment</h6>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td> <b>Name : </b>{{QRF.fullname}}</td>
+                            <td> <b>Address : </b>{{QRF.address}}</td>
+                            <td> <b>Gender : </b>{{QRF.gender}}</td>
+                        </tr>
+                        <tr>
+                            <td> <b>Contact : </b>{{QRF.contact}}</td>
+                            <td colspan="2"> <b>Email : </b>{{QRF.email}}</td>
+                        </tr>
+                        <tr>
+                            <td> <b>College : </b>{{QRF.college}}</td>
+                            <td colspan="2"> <b>College Address : </b>{{QRF.collegeaddress}}</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2"><b>Subject/Title : </b>{{QRF.subject}}</td>
+                            <td><b>No. of Member : </b>{{QRF.noofmembers}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><b>Group Members : </b>{{QRF.groupmembers}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <form action="{% url 'clientpay' eid=QRE.id cid=QRF.id %}" method="post">{% csrf_token %}
+                    <div class="form-group">
+                        <label for="">Pay Amount</label>
+                        <input type="text" class="form-control form-control-sm" name="feeamount" id="" aria-describedby="helpId"
+                            placeholder="" value="{{QRE.feeamount}}" readonly>
+                    </div>
+                    <button type="submit" name="feepay" class="btn btn-primary">Pay</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+</body>
+
+</html>

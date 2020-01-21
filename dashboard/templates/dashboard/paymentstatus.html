@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>QRGen Payment Status- Client</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body id="page-top">
+
+    <div class="container">
+        <div class="col my-4">
+
+            <h2>Payment status of {{QRF.fullname}}</h2>
+            {% if response.RESPCODE == '01' %}
+            <table class="table table-bordered table-sm">
+                <tbody>
+                    <tr>
+                        <td>Name </td>
+                        <td>{{QRF.fullname}}</td>
+                    </tr>
+                    <tr>
+                        <td>CURRENCY  </td>
+                        <td>{{response.CURRENCY}}</td>
+                    </tr>
+                    <tr>
+                        <td>GATEWAYNAME  </td>
+                        <td>{{response.GATEWAYNAME}}</td>
+                    </tr>
+                    <!-- <tr>
+                        <td>RESPMSG</td>
+                        <td>{{response.RESPMSG}}</td>
+                    </tr> -->
+                    <tr>
+                        <td>BANKNAME</td>
+                        <td>{{response.BANKNAME}}</td>
+                    </tr>
+                    <tr>
+                        <td>PAYMENTMODE</td>
+                        <td>{{response.PAYMENTMODE}}</td>
+                    </tr>
+                    <!-- <tr>
+                        <td>RESPCODE</td>
+                        <td>{{response.RESPCODE}}</td>
+                    </tr> -->
+                    <tr>
+                        <td>TXNID</td>
+                        <td>{{response.TXNID}}</td>
+                    </tr>
+                    <tr>
+                        <td>TXNAMOUNT</td>
+                        <td>{{response.TXNAMOUNT}}</td>
+                    </tr>
+                    <tr>
+                        <td>ORDERID</td>
+                        <td>{{response.ORDERID}}</td>
+                    </tr>
+                    <tr>
+                        <td>STATUS</td>
+                        <td><b>{{response.STATUS}}</b></td>
+                    </tr>
+                    <tr>
+                        <td>BANKTXNID</td>
+                        <td>{{response.BANKTXNID}}</td>
+                    </tr>
+                    <tr>
+                        <td>TXNDATE</td>
+                        <td>{{response.TXNDATE}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <a class="btn btn-primary float-right" href="{% url 'printpage' eid=QRF.eventid  cid=QRF.id %}">Print</a>
+
+            {% else %}
+            ORDER FAILURE
+            {% endif%}
+
+        </div>
+
+    </div>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>QRGen - Client</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1>{{QRE.title}}</h1>
+                <p>{{QRE.description}}</p>
+            </div>
+        </div>
+
+        {% if QRE.status == 'Created' or QRE.status == 'created' %}
+        <h5 class="text-primary">The Registration for this event has not started.</h5>
+        {% elif QRE.status == 'Active' or QRE.status == 'active' %}
+        <div class="container">
+            <form action="{% url 'qrevent_client' id=QRE.id %}" method="post">{% csrf_token %}
+                <div class="form-group">
+                    <label for="">Full Name</label>
+                    <input type="text" class="form-control form-control-sm" name="fullname" id="" aria-describedby="helpId"
+                        placeholder="" required>
+                    <small id="helpId" class="form-text text-muted text-danger">Surname Name MiddleName</small>
+                </div>
+                <div class="form-group">
+                    <label for="">Address</label>
+                    <input type="text" class="form-control form-control-sm" name="address" id="" aria-describedby="helpId"
+                        placeholder="" required>
+                    <small id="helpId" class="form-text text-muted text-danger">Surname Name MiddleName</small>
+                </div>
+                <div class="form-group">
+                    <label for="">College</label>
+                    <input type="text" class="form-control form-control-sm" name="college" id="" aria-describedby="helpId"
+                        placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="">College Address</label>
+                    <input type="text" class="form-control form-control-sm" name="collegeaddress" id="" aria-describedby="helpId"
+                        placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Contact</label>
+                    <input type="text" class="form-control form-control-sm" name="contact" id="" aria-describedby="helpId"
+                        placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" class="form-control form-control-sm" name="email" id="" aria-describedby="helpId" placeholder=""
+                        required>
+                    <small id="helpId" class="form-text text-muted text-danger">Confirmation Will be sent on this
+                        mail.</small>
+
+                </div>
+                <div class="form-group">
+                    <label for="">Gender</label>
+                    <select class="form-control form-control-sm" name="gender" id="" required>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Subject/Title</label>
+                    <input type="text" class="form-control form-control-sm " name="subject" id="" aria-describedby="helpId"
+                        placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="">No. of Member</label>
+                    <input type="text" class="form-control form-control-sm " name="noofmembers" id="" aria-describedby="helpId"
+                        placeholder="" required>
+                    <small id="helpId" class="form-text text-muted text-danger">Mension No of group members includeing yourself.</small>
+                </div>
+                <div class="form-group">
+                    <label for="">Group Member(if any)</label>
+                    <input type="text" class="form-control form-control-sm" name="groupmembers" id="" aria-describedby="helpId"
+                        placeholder="">
+                </div>
+                {% if QRE.enablepayment == '1' %}
+                <button type="submit" class="btn btn-primary">Save & Pay</button>
+                {% endif %}
+                {% if QRE.enablepayment == '0' %}
+                <button type="submit" class="btn btn-primary">Save And Submit</button>
+                {% endif %}
+
+            </form>
+        </div>
+        {% elif QRE.status == 'Disabled' or QRE.status == 'disabled' %}
+        <h5 class="text-danger">{{QRE.disabledesc}}</h5>
+        {% endif %}
+    </div>
+</body>
+
+</html>

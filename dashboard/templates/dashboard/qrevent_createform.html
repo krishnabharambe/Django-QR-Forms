@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Set Event Fee</h6>
+        </div>
+        <div class="card-body">
+
+            {% if QR.enablepayment == '1' %}
+                <form action="{% url 'qrevent_createform' id=QR.id %}" method="post">{% csrf_token %}
+                    <div class="form-group">
+                      <label for="">Event Fee</label>
+                      <input type="text"
+                        class="form-control form-control-sm" required value="{{QR.feeamount}}" name="feeamount" id="" aria-describedby="helpId" placeholder="">
+                    </div>
+                    <button type="submit" name="setfee" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="disablefee" class="btn btn-danger">Disbale Fee</button>
+                </form>
+            {% else %}
+                <small class="text-danger">No Payment  Required.</small>
+                <form action="{% url 'qrevent_createform' id=QR.id %}" method="post">{% csrf_token %}
+                    <div class="form-group">
+                      <label for="">Payment Status</label>
+                      <select class="form-control form-control-sm" name="enablepayment" id="" required>
+                        <option value="0">No Fee</option>
+                        <option value="1">Set Fee Amount</option>
+                      </select>
+                    </div>
+                    <button type="submit" name="setenablepayment" class="btn btn-primary">Submit</button>
+                </form>
+            {% endif %}
+
+            <form action="" method="post">
+
+            </form>
+        </div>
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Form Field Views</h6>
+        </div>
+        <div class="card-body">
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="">Full Name</label>
+                    <input type="text" class="form-control form-control-sm" name="fullname" id="" aria-describedby="helpId"
+                        placeholder="" required>
+                    <small id="helpId" class="form-text text-muted text-danger">Surname Name MiddleName</small>
+                </div>
+                <div class="form-group">
+                    <label for="">Address</label>
+                    <input type="text" class="form-control form-control-sm" name="fullname" id="" aria-describedby="helpId"
+                        placeholder="" required>
+                    <small id="helpId" class="form-text text-muted text-danger">Surname Name MiddleName</small>
+                </div>
+                <div class="form-group">
+                    <label for="">College</label>
+                    <input type="text" class="form-control form-control-sm" name="college" id="" aria-describedby="helpId"
+                        placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="">College Address</label>
+                    <input type="text" class="form-control form-control-sm" name="collegeaddress" id="" aria-describedby="helpId"
+                        placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Contact</label>
+                    <input type="text" class="form-control form-control-sm" name="contact" id="" aria-describedby="helpId"
+                        placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" class="form-control form-control-sm" name="email" id="" aria-describedby="helpId"
+                        placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Gender</label>
+                    <select class="form-control form-control-sm" name="gender" id="" required>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Subject/Title</label>
+                    <input type="text" class="form-control form-control-sm" name="subject" id="" aria-describedby="helpId"
+                        placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="">No. of Member(includeing you)</label>
+                    <input type="text" class="form-control form-control-sm" name="noofmembers" id="" aria-describedby="helpId"
+                        placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Group Member(if any)</label>
+                    <input type="text" class="form-control form-control-sm" name="groupmembers" id="" aria-describedby="helpId"
+                        placeholder="">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+{% endblock %}

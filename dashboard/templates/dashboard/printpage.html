@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>QRGen Pdf - Client</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+
+    <div class="container-fluid">
+        <h5>Event Registration</h5>
+        <table class="table table-bordered table-sm">
+            <tbody>
+                <tr>
+                    <td colspan="3"><b>Event : </b> {{QRE.title}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"> {{QRE.description}}</td>
+                </tr>
+
+                <tr>
+                    <td colspan="3"> <b>Registration ID : </b>{{QRF.id}}</td>
+                </tr>
+                <tr>
+                    <td> <b>Name : </b>{{QRF.fullname}}</td>
+                    <td> <b>Address : </b>{{QRF.address}}</td>
+                    <td> <b>Gender : </b>{{QRF.gender}}</td>
+                </tr>
+                <tr>
+                    <td> <b>Contact : </b>{{QRF.contact}}</td>
+                    <td colspan="2"> <b>Email : </b>{{QRF.email}}</td>
+                </tr>
+                <tr>
+                    <td> <b>College : </b>{{QRF.college}}</td>
+                    <td colspan="2"> <b>College Address : </b>{{QRF.collegeaddress}}</td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><b>Subject/Title : </b>{{QRF.subject}}</td>
+                    <td><b>No. of Member : </b>{{QRF.noofmembers}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Group Members : </b>{{QRF.groupmembers}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <h5>Payment Details</h5>
+        {% if QRE.enablepayment == '1' %}
+
+        {% for EP in EPS %}
+        <h6>{{EP.TXNID}}</h6>
+        <table class="table table-bordered table-sm">
+        <tbody>
+            <tr>
+                <td>Currency </td>
+                <td>{{EP.CURRENCY}}</td>
+            </tr>
+            <tr>
+                <td>Gateway </td>
+                <td>{{EP.GATEWAYNAME}}</td>
+            </tr>
+            <!-- <tr>
+                    <td>RESPMSG</td>
+                    <td>{{response.RESPMSG}}</td>
+                </tr> -->
+
+            <tr>
+                <td>Payment Mode</td>
+                <td>{{EP.PAYMENTMODE}}</td>
+            </tr>
+            <!-- <tr>
+                    <td>RESPCODE</td>
+                    <td>{{response.RESPCODE}}</td>
+                </tr> -->
+            <tr>
+                <td>TXNID</td>
+                <td>{{EP.TXNID}}</td>
+            </tr>
+            <tr>
+                <td>Amount</td>
+                <td>{{EP.TXNAMOUNT}}</td>
+            </tr>
+            <tr>
+                <td>Order Id</td>
+                <td>{{EP.ORDERID}}</td>
+            </tr>
+            <tr>
+                <td>STATUS</td>
+                <td>{{EP.STATUS}}</td>
+            </tr>
+            <tr>
+                <td>Bank </td>
+                <td>{{EP.BANKNAME}}</td>
+            </tr>
+            <tr>
+                <td>Bank TXNID</td>
+                <td>{{EP.BANKTXNID}}</td>
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td>{{EP.TXNDATE}}</td>
+            </tr>
+        </tbody>
+        </table>
+        {% endfor %}
+        {% endif %}
+
+        <a class="btn btn-primary" href="{% url 'finalprint' eid=QRE.id cid=QRF.id %}">Print</a>
+    </div>
+
+
+</body>
+
+</html>
